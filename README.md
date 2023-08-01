@@ -9,6 +9,7 @@ After booking the events users can confirm their slot by making their payments o
 
 
 Technology : 
+
 	Front-end:
 		HTML
 		CSS(bootstrap)
