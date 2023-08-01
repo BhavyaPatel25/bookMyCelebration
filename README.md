@@ -1,9 +1,6 @@
 # bookMyCelebration
 Developed by : 
-
-       22CE094 - Nilay Patel
-       22CE096 - Shivam Patel
-       22CE097 - Shivang Patel
+       Shivang Patel
 
 Description : 
 	In our website you can book any type of celebration like birthday party, wedding reception, educational events, festival celebrations, etc, by loggin into 
