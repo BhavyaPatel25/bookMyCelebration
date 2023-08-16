@@ -1,10 +1,11 @@
-const express = require('express');
 const bodyParser = require('body-parser');
-const DB = require(__dirname + "/routes/db.js");
+const express = require('express');
 const Window = require('window');
-const port = 3000;
+const mysql = require('mysql');
 const ejs = require('ejs');
+const DB = require(__dirname + "/routes/db.js");
 const { isLogin } = require('./routes/db');
+const port = 3000;
 
 app = express();
 const window = new Window();
@@ -13,6 +14,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //global variables
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'bookmycelebration',
+    port: '3308'
+});
 let verificationNum = 0;
 let createAccountData;
 let LoginData;
@@ -41,13 +49,14 @@ app.get('/Login', function(req, res) {
 
 app.post('/Login', function(req, res) {
     LoginData = req.body;
-    console.log("Statement - 1");
-    flag = DB.isLogin(LoginData);
-    console.log("Testing...." + flag);
-    console.log("Statement - 2");
-    console.log("post method value : " + flag);
-    //console.log("post method value : " + flag);
-    res.render("logedinhome");
+    connection.query(`select * from master where email="${LoginData.emailLogin}" AND password="${LoginData.passwordLogin}"`, function(err, result) {
+        if (err) throw err;
+        if (result.length === 0) {
+            res.render("login", { flag: 2 });
+        } else {
+            res.render("logedinhome");
+        }
+    });
 });
 
 //flag = DB.isLogin(LoginData);
