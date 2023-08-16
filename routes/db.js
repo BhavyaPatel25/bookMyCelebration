@@ -45,25 +45,4 @@ function CreateAccount({ firstNameCA, lastNameCA, phNumberCA, emailCA, passwordC
     return;
 }
 
-// async function isLogin({ emailLogin, passwordLogin }) {
-//     await connection.query(`select * from master where email="${emailLogin}" AND password="${passwordLogin}"`, function(err, result) {
-var flag;
-
-async function isLogin({ emailLogin, passwordLogin }) {
-    await connection.query(`select * from master where email="${emailLogin}" AND password="${passwordLogin}"`, function(err, result) {
-        //var flag;
-        if (err) throw err;
-        if (result.length === 0) {
-            console.log("Not Found");
-            flag = 0;
-        } else {
-            console.log("Welcome");
-            flag = 1;
-        }
-        //return flag;
-    });
-    await console.log("is login flag : " + flag)
-
-}
-
-module.exports = { isFound, CreateAccount, isLogin };
+module.exports = { isFound, CreateAccount };

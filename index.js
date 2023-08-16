@@ -24,7 +24,6 @@ var connection = mysql.createConnection({
 let verificationNum = 0;
 let createAccountData;
 let LoginData;
-let flag;
 
 //Routes for rendaring the file
 app.get('/', function(req, res) {
@@ -59,9 +58,6 @@ app.post('/Login', function(req, res) {
     });
 });
 
-//flag = DB.isLogin(LoginData);
-//setTimeout(function() { console.log(flag); }, 1000);
-
 app.get('/Createaccount', function(req, res) {
     res.render('createaccount', { flag: 0 });
 });
@@ -90,6 +86,26 @@ app.post('/OTPVer', function(req, res) {
 
 app.get('/logedinhome', function(req, res) {
     res.render('logedinhome')
+});
+
+app.get('/forgot', function(req, res) {
+    res.render('forgot');
+});
+
+app.post('/forgot', function(req, res) {
+    connection.query(`select * from master where email="${req.body.emailLogin}"`, function(err, result) {
+        if (err) throw err;
+        if (result.length === 0) {
+            res.render("forgot", { flag: 1 });
+        } else {
+
+            // res.render("login", { flag: 3 });
+        }
+    });
+});
+
+app.get('/about', function(req, res) {
+    res.render('aboutus');
 });
 
 //Activate website on specific port
