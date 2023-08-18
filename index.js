@@ -24,6 +24,7 @@ var connection = mysql.createConnection({
 let verificationNum = 0;
 let createAccountData;
 let LoginData;
+let flag;
 
 //Routes for rendaring the file
 app.get('/', function(req, res) {
@@ -46,28 +47,29 @@ app.get('/Login', function(req, res) {
     res.render("Login", { flag: 0 });
 });
 
-app.post('/Login', function(req, res) {
+app.post('/Login', async function(req, res) {
     LoginData = req.body;
-    connection.query(`select * from master where email="${LoginData.emailLogin}" AND password="${LoginData.passwordLogin}"`, function(err, result) {
-        if (err) throw err;
-        if (result.length === 0) {
-            res.render("login", { flag: 2 });
-        } else {
-            res.render("logedinhome");
-        }
-    });
+    flag = await DB.isLogin(LoginData);
+    if (flag == 1)
+        res.render("logedinhome");
+    else
+        res.render("login", { flag: 2 });
 });
 
 app.get('/Createaccount', function(req, res) {
     res.render('createaccount', { flag: 0 });
 });
 
-app.post('/Createaccount', function(req, res) {
+app.post('/Createaccount', async function(req, res) {
     createAccountData = req.body;
     if (createAccountData.passwordCA == createAccountData.passwordCAVerify) {
-        verificationNum = DB.isFound(req.body);
+        verificationNum = await DB.isFound(req.body);
         console.log(verificationNum);
-        res.redirect("/OTPVer");
+        if (verificationNum == 0) {
+            res.render("createaccount", { flag: 2 });
+        } else {
+            res.redirect("/OTPVer");
+        }
     } else {
         res.render("createaccount", { flag: 1 });
     }
@@ -98,7 +100,6 @@ app.post('/forgot', function(req, res) {
         if (result.length === 0) {
             res.render("forgot", { flag: 1 });
         } else {
-
             // res.render("login", { flag: 3 });
         }
     });
