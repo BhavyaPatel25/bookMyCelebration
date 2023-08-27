@@ -47,13 +47,13 @@
                 <%} else if(flag == 2) { %>
                     <div class="alert alert-danger" role="alert">Please enter valid email address and password</div>
                     <% } %>
-                        <form action="/Login" method="post">
+                        <form action="/Login" method="post" autocomplete="off">
                             <div class="form-floating mb-4">
-                                <input type="email" class="form-control" id="emailLogin" placeholder="name@example.com" name="emailLogin">
+                                <input type="email" class="form-control" id="emailLogin" placeholder="name@example.com" name="emailLogin" autocomplete="off">
                                 <label for="emailLogin">Email address</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="passwordLogin" placeholder="Password" name="passwordLogin">
+                                <input type="password" class="form-control" id="passwordLogin" placeholder="Password" name="passwordLogin" autocomplete="off">
                                 <label for="passwordLogin">Password</label>
                             </div>
                             <div class="d-grid">
