@@ -1,10 +1,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const Window = require('window');
-const mysql = require('mysql');
-const ejs = require('ejs');
+//const mysql = require('mysql');
+//const ejs = require('ejs');
 const DB = require(__dirname + "/routes/db.js");
-const { isLogin } = require('./routes/db');
 const port = 3000;
 
 app = express();
@@ -12,15 +11,9 @@ const window = new Window();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+//app.use(express.static("views/CSS"));
 
 //global variables
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'bookmycelebration',
-    port: '3308'
-});
 let verificationNum = 0;
 let createAccountData;
 let logedInUserData;
@@ -33,11 +26,15 @@ app.get('/', function(req, res) {
 });
 
 app.get('/upcomingevent', function(req, res) {
-    res.render("upcoming");
+    res.render("upcoming", { log: logedInUserData[0] });
 });
 
 app.get('/addevent', function(req, res) {
-    res.render("addevent");
+    res.render("addevent", { log: logedInUserData[0] });
+});
+
+app.get('/collab', function(req, res) {
+    res.render("collab", { log: logedInUserData[0] });
 });
 
 app.get('/home', function(req, res) {
@@ -51,10 +48,14 @@ app.get('/Login', function(req, res) {
 app.post('/Login', async function(req, res) {
     LoginData = req.body;
     logedInUserData = await DB.isLogin(LoginData);
-    if (logedInUserData[0].password == LoginData.passwordLogin)
-        res.render("logedinhome", { log: logedInUserData[0] });
-    else
+    if (logedInUserData.length != 0) {
+        if (logedInUserData[0].password == LoginData.passwordLogin)
+            res.render("logedinhome", { log: logedInUserData[0] });
+        else
+            res.render("login", { flag: 2 });
+    } else {
         res.render("login", { flag: 2 });
+    }
 });
 
 app.get('/Createaccount', function(req, res) {
@@ -103,6 +104,10 @@ app.post('/forgot', function(req, res) {
 
 app.get('/Profile', function(req, res) {
     res.render('profile', { log: logedInUserData[0] });
+});
+
+app.get('/Gallery', function(req, res) {
+    res.render('Gallery', { log: logedInUserData[0] })
 });
 
 app.get('/about', function(req, res) {

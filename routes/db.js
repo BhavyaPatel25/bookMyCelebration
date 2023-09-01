@@ -36,32 +36,12 @@ function sendEMail(mailAddress, subject, arghtml) {
         to: `${mailAddress}`,
         subject: `${subject}`,
         html: `${arghtml}`
-            //subject: 'Verify your self...',
-            //html: `<h4>Welcome to bookMyCelebration... <br> Here your verification code is </h4> <h1> ${num} </h1>`
     };
     transporter.sendMail(mailOptions, function(error, info) {
         if (error) throw error;
         return;
     });
 }
-
-// connection.query(`select * from master where email="${emailCA}"`, function(err, result) {
-//     if (err) throw err;
-//     if (result.length != 0) {
-//         var mailOptions = {
-//             from: 'smart20072020@gmail.com',
-//             to: `${emailCA}`,
-//             subject: 'Verify your self...',
-//             html: `<h4>Welcome to bookMyCelebration... <br> Here your verification code is </h4> <h1> ${num} </h1>`
-//         };
-//         transporter.sendMail(mailOptions, function(error, info) {
-//             if (error) throw error;
-//             return;
-//         });
-//     }
-// });
-//return num;
-//}
 
 function CreateAccount({ firstNameCA, lastNameCA, phNumberCA, emailCA, passwordCA }) {
     connection.query(`insert into master (firstname, lastname, contactno, email, password) values("${firstNameCA}", "${lastNameCA}", "${phNumberCA}", "${emailCA}", "${passwordCA}")`);
