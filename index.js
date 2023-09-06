@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const Window = require('window');
+const { isLogin, update } = require('./routes/db');
 //const mysql = require('mysql');
 //const ejs = require('ejs');
 const DB = require(__dirname + "/routes/db.js");
@@ -66,13 +67,21 @@ app.get('/Createaccount', function(req, res) {
 app.post('/Createaccount', async function(req, res) {
     createAccountData = req.body;
     if (createAccountData.passwordCA == createAccountData.passwordCAVerify) {
-        verificationNum = await DB.isFound(createAccountData.emailCA);
-        console.log(verificationNum);
+        try {
+            verificationNum = await DB.isFound(createAccountData.emailCA);
+            console.log(verificationNum);
+        } catch (error) {
+            console.log("Error found in retriving the data from database");
+        }
         if (verificationNum == 0) {
             res.render("templates/createaccount", { flag: 2 });
         } else {
             const message = `<h4>Welcome to bookMyCelebration... <br> Here your verification code is </h4> <h1> ${verificationNum} </h1>`;
-            await DB.sendEMail(createAccountData.emailCA, "Verify your self on bookMyCelebration...", message);
+            try {
+                await DB.sendEMail(createAccountData.emailCA, "Verify your self on bookMyCelebration...", message);
+            } catch (error) {
+                console.log("Error got in sending an email");
+            }
             res.render("templates/OTPVer");
         }
     } else {
@@ -104,15 +113,48 @@ app.post('/forgot', function(req, res) {
 });
 
 app.get('/Profile', function(req, res) {
-    res.render('templates/profile', { log: logedInUserData[0] });
+    try {
+        res.render('templates/profile', { log: logedInUserData[0], flag: 0 });
+    } catch (error) {
+        res.render('templates/login', { flag: 0 });
+    }
+});
+
+app.post('/Profile', async function(req, res) {
+    const data = req.body;
+    isupdate = 0;
+    try {
+        if (data.firstNamePF != logedInUserData[0].firstname || data.lastNamePF != logedInUserData[0].lastname || data.addressPF != logedInUserData[0].Address || data.phnoPF != logedInUserData[0].contactno || data.emailPF != logedInUserData[0].email || data.passwordPF != logedInUserData[0].password) {
+            logedInUserData[0] = await DB.update(data, logedInUserData[0].email);
+            isupdate = 1;
+        }
+        res.render('templates/profile', { log: logedInUserData[0], flag: isupdate });
+    } catch (error) {
+        console.log(error);
+        res.render('templates/login', { flag: 0 })
+    }
 });
 
 app.get('/Gallery', function(req, res) {
-    res.render('templates/Gallery', { log: logedInUserData[0] })
+    const arg = req.query.i;
+    if (arg == 0) {
+        res.render('templates/Gallery', { access: 0 })
+    } else {
+        res.render('templates/Gallery', { log: logedInUserData[0], access: 1 })
+    }
 });
 
 app.get('/about', function(req, res) {
-    res.render('templates/aboutusLog');
+    const arg = req.query.i;
+    if (arg == 0) {
+        res.render('templates/aboutus', { access: 0 });
+    } else {
+        try {
+            res.render('templates/aboutus', { log: logedInUserData[0], access: 1 });
+        } catch (error) {
+            res.render('templates/Login', { flag: 0 });
+        }
+    }
 });
 
 app.get('/aboutlog', function(req, res) {
@@ -121,5 +163,5 @@ app.get('/aboutlog', function(req, res) {
 
 //Activate website on specific port
 app.listen(port, () => {
-    console.log(`Port listing at http://localhost:${port}`);
+    console.log(`Server is running at http://localhost:${port}/`);
 })

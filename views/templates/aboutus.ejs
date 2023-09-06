@@ -103,23 +103,25 @@ Thank you for considering Book My Celebration to be a part of your special momen
 </head>
 
 <body>
-    <%- include("header2") %>
-        <!-- <div class="header">
-        <h1>About Us</h1>
-    </div> -->
-        <div class="container">
-            <div class="about-text">
-                <h2 style="margin-bottom: 10px;">Welcome to Book My Celebration!</h2>
-                <p>We are your one-stop destination for planning and booking memorable celebrations and events. With a team of dedicated professionals, we ensure that your special moments are turned into unforgettable experiences.</p>
-                <p>From weddings and birthdays to corporate gatherings and more, we handle every detail with care and precision. Our mission is to make your celebrations stress-free and extraordinary.</p>
-            </div>
-            <!-- <div class="about-image">
+    <% if(access==0){ %>
+        <%- include("header") %>
+            <% } else if(access==1) { %>
+                <%- include("header2") %>
+                    <% } %>
+
+                        <div class="container">
+                            <div class="about-text">
+                                <h2 style="margin-bottom: 10px;">Welcome to Book My Celebration!</h2>
+                                <p>We are your one-stop destination for planning and booking memorable celebrations and events. With a team of dedicated professionals, we ensure that your special moments are turned into unforgettable experiences.</p>
+                                <p>From weddings and birthdays to corporate gatherings and more, we handle every detail with care and precision. Our mission is to make your celebrations stress-free and extraordinary.</p>
+                            </div>
+                            <!-- <div class="about-image">
             <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wallpaperflare.com%2Fsearch%3Fwallpaper%3Dthank%2Byou&psig=AOvVaw0gCssLwddDTbiRL0UH8L-Z&ust=1693633198468000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCMDOwb7ZiIEDFQAAAAAdAAAAABAD" alt="Book My Celebration Team">
         </div> -->
-        </div>
-        <div class="footer">
-            @Copyright bookMyCelebration 2023 - All Right Reserved.
-        </div>
+                        </div>
+                        <div class="footer">
+                            @Copyright bookMyCelebration 2023 - All Right Reserved.
+                        </div>
 </body>
 
 </html>

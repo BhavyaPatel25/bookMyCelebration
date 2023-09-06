@@ -53,8 +53,23 @@
                                 <label for="emailLogin">Email address</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="passwordLogin" placeholder="Password" name="passwordLogin" autocomplete="off">
-                                <label for="passwordLogin">Password</label>
+                                <div class="input-group">
+                                    <div class="form-floating">
+                                        <input type="password" class="form-control" id="passwordLogin" placeholder="Password" required name="passwordLogin">
+                                        <label for="passwordLogin">Password</label>
+                                    </div>
+                                    <button style="border-radius: 10px; cursor:pointer;" onclick="showPass();" type="button" class="input-group-text">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 17 17" style="margin-bottom: 2px;">
+                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                            </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="input-group has-validation">
+
+                                </div>
                             </div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-outline-primary" style="font-weight: 700;">Sign In</button>
@@ -68,5 +83,15 @@
         </section>
         <%- include('footer') %>
 </body>
+<script>
+    function showPass() {
+        var x = document.getElementById("passwordLogin");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 
 </html>
