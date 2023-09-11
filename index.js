@@ -12,7 +12,7 @@ const window = new Window();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-//app.use(express.static("views/CSS"));
+app.use(express.static("views/CSS"));
 app.use(express.static("views/templates"));
 
 //global variables
@@ -28,15 +28,27 @@ app.get('/', function(req, res) {
 });
 
 app.get('/upcomingevent', function(req, res) {
-    res.render("templates/upcoming", { log: logedInUserData[0] });
+    try {
+        res.render("templates/upcoming", { log: logedInUserData[0] });
+    } catch (error) {
+        res.render("templates/Login", { flag: 0 });
+    }
 });
 
 app.get('/addevent', function(req, res) {
-    res.render("templates/addevent", { log: logedInUserData[0] });
+    try {
+        res.render("templates/addevent", { log: logedInUserData[0] });
+    } catch (error) {
+        res.render("templates/Login", { flag: 0 });
+    }
 });
 
 app.get('/collab', function(req, res) {
-    res.render("templates/collab", { log: logedInUserData[0] });
+    try {
+        res.render("templates/collab", { log: logedInUserData[0] });
+    } catch (error) {
+        res.render("templates/Login", { flag: 0 });
+    }
 });
 
 app.get('/home', function(req, res) {
@@ -71,18 +83,19 @@ app.post('/Createaccount', async function(req, res) {
             verificationNum = await DB.isFound(createAccountData.emailCA);
             console.log(verificationNum);
         } catch (error) {
+            console.log(error);
             console.log("Error found in retriving the data from database");
         }
         if (verificationNum == 0) {
             res.render("templates/createaccount", { flag: 2 });
         } else {
-            const message = `<h4>Welcome to bookMyCelebration... <br> Here your verification code is </h4> <h1> ${verificationNum} </h1>`;
+            const message = DB.OTPMessage(createAccountData.firstNameCA, verificationNum);
             try {
                 await DB.sendEMail(createAccountData.emailCA, "Verify your self on bookMyCelebration...", message);
             } catch (error) {
                 console.log("Error got in sending an email");
             }
-            res.render("templates/OTPVer");
+            res.render("templates/OTPVer", { mail: createAccountData.emailCA });
         }
     } else {
         res.render("templates/createaccount", { flag: 1 });
@@ -101,7 +114,11 @@ app.post('/OTPVer', function(req, res) {
 });
 
 app.get('/logedinhome', function(req, res) {
-    res.render('templates/logedinhome', { log: logedInUserData[0] })
+    try {
+        res.render('templates/logedinhome', { log: logedInUserData[0] })
+    } catch (error) {
+        res.render("templates/login", { flag: 0 });
+    }
 });
 
 app.get('/forgot', function(req, res) {
@@ -116,7 +133,7 @@ app.get('/Profile', function(req, res) {
     try {
         res.render('templates/profile', { log: logedInUserData[0], flag: 0 });
     } catch (error) {
-        res.render('templates/login', { flag: 0 });
+        res.render('templates/Login', { flag: 0 });
     }
 });
 
@@ -131,7 +148,7 @@ app.post('/Profile', async function(req, res) {
         res.render('templates/profile', { log: logedInUserData[0], flag: isupdate });
     } catch (error) {
         console.log(error);
-        res.render('templates/login', { flag: 0 })
+        res.render('templates/Login', { flag: 0 })
     }
 });
 
@@ -140,7 +157,11 @@ app.get('/Gallery', function(req, res) {
     if (arg == 0) {
         res.render('templates/Gallery', { access: 0 })
     } else {
-        res.render('templates/Gallery', { log: logedInUserData[0], access: 1 })
+        try {
+            res.render('templates/Gallery', { log: logedInUserData[0], access: 1 })
+        } catch (error) {
+            res.render("templates/Gallery", { access: 0 });
+        }
     }
 });
 
@@ -157,9 +178,6 @@ app.get('/about', function(req, res) {
     }
 });
 
-app.get('/aboutlog', function(req, res) {
-    res.render('templates/aboutusLogedIn', { log: logedInUserData[0] });
-});
 
 //Activate website on specific port
 app.listen(port, () => {
