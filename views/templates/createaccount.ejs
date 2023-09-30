@@ -51,27 +51,27 @@
                     <% } %>
                         <form action="/Createaccount" method="post">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="firstNameCA" placeholder="ABC" name="firstNameCA">
+                                <input type="text" class="form-control" id="firstNameCA" placeholder="ABC" name="firstNameCA" required>
                                 <label for="firstNameCA">First name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="lastNameCA" placeholder="XYZ" name="lastNameCA">
+                                <input type="text" class="form-control" id="lastNameCA" placeholder="XYZ" name="lastNameCA" required>
                                 <label for="lastNameCA">Last name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" id="phNumberCA" placeholder="+91 9999999999" name="phNumberCA">
+                                <input type="tel" class="form-control" id="phNumberCA" placeholder="+91 9999999999" name="phNumberCA" maxlength="10" minlength="10" required>
                                 <label for="phNumberCA">Contact no.</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="emailCA" placeholder="example@email.com" name="emailCA">
+                                <input type="email" class="form-control" id="emailCA" placeholder="example@email.com" name="emailCA" required>
                                 <label for="emailCA">Email address</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="passwordCA" placeholder="Password" name="passwordCA">
+                                <input type="password" class="form-control" id="passwordCA" placeholder="Password" name="passwordCA" required>
                                 <label for="passwordCA">Password</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="passwordCAVerift" placeholder="Password" name="passwordCAVerify">
+                                <input type="password" class="form-control" id="passwordCAVerift" placeholder="Password" name="passwordCAVerify" required>
                                 <label for="passwordCAVerify">Confirm Password</label>
                             </div>
                             <div class="d-grid">
