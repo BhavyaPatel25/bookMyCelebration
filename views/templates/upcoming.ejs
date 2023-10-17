@@ -2,60 +2,187 @@
 
 <head>
     <style>
-        table {
-            font-size: 20px;
-        }
-        
-        #container {
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-top: 20px;
-        }
+
     </style>
     <link rel="icon" href="/titleLogo.png" type="image/icon type">
 </head>
 
 <body>
     <%- include("header2") %>
-        <main>
-            <div id="container">
-                <table class="table table-success table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Sr. No.</th>
-                            <th scope="col">Organize by</th>
-                            <th scope="col">Event Type</th>
-                            <th scope="col">Date and Time</th>
-                            <th scope="col">Venue</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry the Bird</td>
-                            <td>Maxico</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </main>
-        <%- include("footer") %>
+    <style>
+        body {
+            background-image: url('background-image.jpg');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 30px #428bca9b;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #428bca;
+            color: #fff;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #ddd;
+        }
+        
+        .calendar {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .day {
+            width: 14.2857%;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .event {
+            background-color: #428bca;
+            color: #fff;
+            border-radius: 5px;
+            padding: 5px;
+            margin: 5px;
+        }
+        .footer {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            letter-spacing: 2px;
+            word-spacing: 5px;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <div class="container">
+        <h4 style="margin-bottom: 20px;">Upcoming Events</h4>
+        <table>
+            <tr>
+                <th>Sr. no</th>
+                <th>Event Type</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Organizer</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Music Festival</td>
+                <td>2023-10-15</td>
+                <td>09:00 AM</td>
+                <td>Main Park</td>
+                <td>Music Events, Inc.</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Conference 2023</td>
+                <td>2023-10-20</td>
+                <td>09:30 AM</td>
+                <td>Conference Center</td>
+                <td>Conference Pro, LLC</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Art Exhibition</td>
+                <td>2023-10-25</td>
+                <td>02:00 PM</td>
+                <td>Art Gallery</td>
+                <td>Local Art Society</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Sports Tournament</td>
+                <td>2023-10-30</td>
+                <td>10:00 AM</td>
+                <td>Sports Complex</td>
+                <td>Sporting Events Co.</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Tech Conference</td>
+                <td>2023-11-05</td>
+                <td>08:30 AM</td>
+                <td>Tech Convention Center</td>
+                <td>Tech Solutions Group</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Food Festival</td>
+                <td>2023-11-10</td>
+                <td>11:00 AM</td>
+                <td>Downtown Park</td>
+                <td>Culinary Creations, Inc.</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Charity Gala</td>
+                <td>2023-11-15</td>
+                <td>07:00 PM</td>
+                <td>Elegant Ballroom</td>
+                <td>Helping Hands Foundation</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Fashion Show</td>
+                <td>2023-11-20</td>
+                <td>06:30 PM</td>
+                <td>Fashion Hall</td>
+                <td>Chic Creations, LLC</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Soccer Tournament</td>
+                <td>2023-11-25</td>
+                <td>09:00 AM</td>
+                <td>Sports Park</td>
+                <td>Sports League Association</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Holiday Market</td>
+                <td>2023-12-01</td>
+                <td>10:00 AM</td>
+                <td>City Square</td>
+                <td>Local Vendors Collective</td>
+            </tr>
+            
+        </table>
+        
+    </div>
+        
+
+    <div class="footer">
+        @Copyright bookMyCelebration 2023 - All Right Reserved.
+    </div>
 </body>
 
 </html>

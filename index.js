@@ -155,12 +155,12 @@ app.post('/Profile', async function(req, res) {
 app.get('/Gallery', function(req, res) {
     const arg = req.query.i;
     if (arg == 0) {
-        res.render('templates/Gallery', { access: 0 })
+        res.render('templates/ResGallery', { access: 0 })
     } else {
         try {
-            res.render('templates/Gallery', { log: logedInUserData[0], access: 1 })
+            res.render('templates/ResGallery', { log: logedInUserData[0], access: 1 })
         } catch (error) {
-            res.render("templates/Gallery", { access: 0 });
+            res.render("templates/ResGallery", { access: 0 });
         }
     }
 });
@@ -178,6 +178,18 @@ app.get('/about', function(req, res) {
     }
 });
 
+app.get('/birthday', function(req, res) {
+    res.render('templates/Birthday', { log: logedInUserData[0] })
+});
+app.get('/corporate', function(req, res) {
+    res.render('templates/corporate', { log: logedInUserData[0] })
+});
+app.get('/educational', function(req, res) {
+    res.render('templates/educational', { log: logedInUserData[0] })
+});
+app.get('/socialevent', function(req, res) {
+    res.render('templates/socialevent', { log: logedInUserData[0] })
+});
 
 //Activate website on specific port
 app.listen(port, () => {
