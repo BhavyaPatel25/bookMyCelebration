@@ -2,10 +2,8 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const Window = require('window');
 const { isLogin, update } = require('./routes/db');
-//const mysql = require('mysql');
-//const ejs = require('ejs');
 const DB = require(__dirname + "/routes/db.js");
-const port = 3000;
+port = 3000;
 
 app = express();
 const window = new Window();
@@ -179,17 +177,60 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/birthday', function(req, res) {
-    res.render('templates/Birthday', { log: logedInUserData[0] })
+    try {
+        res.render('templates/Birthday', { log: logedInUserData[0] })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
 });
 app.get('/corporate', function(req, res) {
-    res.render('templates/corporate', { log: logedInUserData[0] })
+    try {
+        res.render('templates/corporate', { log: logedInUserData[0] })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
 });
 app.get('/educational', function(req, res) {
-    res.render('templates/educational', { log: logedInUserData[0] })
+    try {
+        res.render('templates/educational', { log: logedInUserData[0] })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
 });
 app.get('/socialevent', function(req, res) {
-    res.render('templates/socialevent', { log: logedInUserData[0] })
+    try {
+        res.render('templates/socialevent', { log: logedInUserData[0] })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
 });
+
+app.get('/collabForms', function(req, res) {
+    const formType = req.query.i;
+    try {
+        res.render('templates/collabForms', { log: logedInUserData[0], fType: formType, result: 0 })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+});
+
+app.post('/collabForms', function(req, res) {
+    const formType = req.query.i;
+    const data = req.body;
+    try {
+        DB.addCollabrators(data, formType);
+        res.render('templates/collabForms', { log: logedInUserData[0], fType: formType, result: 1 })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+});
+
+
+
+// let server = app.listen(0, () => {
+//     //console.log(`Server is running at http://localhost:${port}/`);
+//     console.log(`Server is running at http://localhost:${server.address().port}`)
+// })
 
 //Activate website on specific port
 app.listen(port, () => {

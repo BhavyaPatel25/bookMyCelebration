@@ -108,4 +108,9 @@ function OTPMessage(firstname, number) {
     return message;
 }
 
-module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage };
+function addCollabrators({ emailCollab, priceCollab, locationCollab, contactCollab, serviceInfoCollab }, serviceType) {
+    connection.query(`insert into collabrator(emailid, serviceprice, location, contactno, serviceinfo, servicetype) values("${emailCollab}", "${priceCollab}", "${locationCollab}", "${contactCollab}", "${serviceInfoCollab}", "${serviceType}")`)
+    return;
+}
+
+module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators };
