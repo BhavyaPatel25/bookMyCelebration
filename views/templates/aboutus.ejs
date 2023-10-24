@@ -8,9 +8,273 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>AboutUs</title>
     <style>
+        .header {
+            /* background-color: #333; */
+            color: olive;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .about {
+            font-size: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+        }
+        
+        .about-text {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: larger;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .talk {
+            border: 5px solid black;
+            /* padding-top: 10px;
+                                padding-left: 30px;
+                                padding-bottom: 15px;*/
+            border-radius: 20px;
+            width: 490px;
+            padding: 20px;
+            background-color: whitesmoke;
+            font-family: Tahoma;
+        }
+        
+        .second {
+            width: 390px;
+            border: 5px solid black;
+            /* padding-top: 10px;
+            padding-left: 30px;
+            padding-bottom: 15px;*/
+            border-radius: 20px;
+            padding: 20px;
+            background-color: whitesmoke;
+            font-family: Tahoma;
+        }
+        
+        .text {
+            color: 3px solid black;
+            font-size: 30px;
+        }
+        
+        .text1 {
+            color: black;
+            border-radius: 4px;
+        }
+        
+        .card-client {
+            margin-top: 50px;
+            margin-left: 50px;
+            background: whitesmoke;
+            width: 13rem;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 4px solid whitesmoke;
+            box-shadow: 5px 9px 9px gray;
+            border-radius: 15px;
+            text-align: center;
+            color: black;
+            font-family: Tahoma;
+            transition: all 0.3s ease;
+        }
+        
+        .card-client:hover {
+            transform: translateY(-10px);
+        }
+        
+        .user-picture {
+            overflow: hidden;
+            object-fit: cover;
+            width: 7rem;
+            height: 7rem;
+            border: 4px solid white;
+            border-radius: 999px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+        
+        .user-picture svg {
+            width: 3.7rem;
+            fill: currentColor;
+        }
+        
+        .name-client {
+            margin: 0;
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .name-client span {
+            display: block;
+            font-weight: 200;
+            font-size: 16px;
+            color: oli;
+        }
+        
+        .social-media:before {
+            content: " ";
+            display: block;
+            width: 100%;
+            height: 2px;
+            margin: 20px 0;
+            background: white;
+        }
+        
+        .social-media a {
+            position: relative;
+            margin-right: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .social-media a:last-child {
+            margin-right: 0;
+        }
+        
+        .social-media a svg {
+            width: 1.1rem;
+            fill: currentColor;
+        }
+        /*-- Tooltip Social Media --*/
+        
+        .tooltip-social {
+            background: gray;
+            color: white;
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            padding: 0.5rem 0.4rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -90%);
+            transition: all 0.2s ease;
+            z-index: 1;
+        }
+        
+        .tooltip-social:after {
+            content: " ";
+            position: absolute;
+            bottom: 1px;
+            left: 50%;
+            border: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: transparent;
+            transform: translate(-50%, 100%);
+        }
+        
+        .social-media a .tooltip-social:after {
+            border-top-color: #262626;
+        }
+        
+        .social-media a:hover .tooltip-social {
+            opacity: 1;
+            transform: translate(-50%, -130%);
+        }
+        
+        .space {
+            padding-left: 200px;
+        }
+        
+        .form-control {
+            border-color: black;
+        }
+        
+        .tk1 {
+            font-size: 70px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+        .tk2 {
+            font-size: 20px;
+            font-family: Tahoma;
+        }
+        
+        .button2 {
+            display: inline-block;
+            transition: all 0.2s ease-in;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            color: #090909;
+            padding: 0.7em 1.7em;
+            font-size: 15px;
+            border-radius: 0.5em;
+            background: #e8e8e8;
+            border: 1px solid #e8e8e8;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+        }
+        
+        .button2:active {
+            color: #666;
+            box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+        }
+        
+        .button2:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) scaleY(1) scaleX(1.25);
+            top: 100%;
+            width: 140%;
+            height: 180%;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            display: block;
+            transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+            z-index: -1;
+        }
+        
+        .button2:after {
+            content: "";
+            position: absolute;
+            left: 55%;
+            transform: translateX(-50%) scaleY(1) scaleX(1.45);
+            top: 180%;
+            width: 160%;
+            height: 190%;
+            background-color: black;
+            border-radius: 50%;
+            display: block;
+            transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+            z-index: -1;
+        }
+        
+        .button2:hover {
+            color: #ffffff;
+            border: 1px solid black;
+        }
+        
+        .button2:hover:before {
+            top: -35%;
+            background-color: black;
+            transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+        }
+        
+        .button2:hover:after {
+            top: -45%;
+            background-color: black;
+            transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+        }
+        
         #NavBar {
             background-color: whitesmoke;
-            box-shadow: 0px 1px 80px black;
+            box-shadow: 0px 5px 100px gray;
         }
     </style>
 </head>
@@ -21,258 +285,8 @@
             <% } else if(access==1) { %>
                 <%- include("header2") %>
                     <% } %>
-                        <style>
-                            .about {
-                                font-size: 40px;
-                            }
-                            
-                            .container {
-                                max-width: 1200px;
-                                margin: 0 auto;
-                                padding: 20px;
-                                background-color: white;
-                                /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-                            }
-                            
-                            .about-text {
-                                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                                font-size: larger;
-                                text-align: center;
-                                margin-bottom: 20px;
-                            }
-                            
-                            .talk {
-                                border: 5px solid black;
-                                border-radius: 20px;
-                                width: 420px;
-                                padding: 20px;
-                                background-color: whitesmoke;
-                                font-family: Tahoma;
-                            }
-                            
-                            .second {
-                                width: 390px;
-                                border: 5px solid black;
-                                border-radius: 20px;
-                                padding: 20px;
-                                background-color: whitesmoke;
-                                font-family: Tahoma;
-                            }
-                            
-                            .text {
-                                color: 3px solid black;
-                                font-size: 30px;
-                            }
-                            
-                            .text1 {
-                                color: black;
-                                border-radius: 4px;
-                            }
-                            
-                            .card-client {
-                                margin-top: 50px;
-                                margin-left: 50px;
-                                background: whitesmoke;
-                                width: 13rem;
-                                padding-top: 25px;
-                                padding-bottom: 25px;
-                                padding-left: 20px;
-                                padding-right: 20px;
-                                border: 4px solid whitesmoke;
-                                box-shadow: 5px 9px 9px gray;
-                                border-radius: 15px;
-                                text-align: center;
-                                color: black;
-                                font-family: Tahoma;
-                                transition: all 0.3s ease;
-                            }
-                            
-                            .card-client:hover {
-                                transform: translateY(-10px);
-                            }
-                            
-                            .user-picture {
-                                overflow: hidden;
-                                object-fit: cover;
-                                width: 7rem;
-                                height: 7rem;
-                                border: 4px solid white;
-                                border-radius: 999px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                margin: auto;
-                            }
-                            
-                            .user-picture svg {
-                                width: 3.7rem;
-                                fill: currentColor;
-                            }
-                            
-                            .name-client {
-                                margin: 0;
-                                margin-top: 20px;
-                                font-weight: 600;
-                                font-size: 18px;
-                            }
-                            
-                            .name-client span {
-                                display: block;
-                                font-weight: 200;
-                                font-size: 16px;
-                                color: oli;
-                            }
-                            
-                            .social-media:before {
-                                content: " ";
-                                display: block;
-                                width: 100%;
-                                height: 2px;
-                                margin: 20px 0;
-                                background: white;
-                            }
-                            
-                            .social-media a {
-                                position: relative;
-                                margin-right: 15px;
-                                text-decoration: none;
-                                color: inherit;
-                            }
-                            
-                            .social-media a:last-child {
-                                margin-right: 0;
-                            }
-                            
-                            .social-media a svg {
-                                width: 1.1rem;
-                                fill: currentColor;
-                            }
-                            /*-- Tooltip Social Media --*/
-                            
-                            .tooltip-social {
-                                background: black;
-                                color: white;
-                                display: block;
-                                position: absolute;
-                                bottom: 0;
-                                left: 50%;
-                                padding: 0.5rem 0.4rem;
-                                border-radius: 5px;
-                                font-size: 0.8rem;
-                                font-weight: 600;
-                                opacity: 0;
-                                pointer-events: none;
-                                transform: translate(-50%, -90%);
-                                transition: all 0.2s ease;
-                                z-index: 1;
-                            }
-                            
-                            .tooltip-social:after {
-                                content: " ";
-                                position: absolute;
-                                bottom: 1px;
-                                left: 50%;
-                                border: solid;
-                                border-width: 10px 10px 0 10px;
-                                border-color: transparent;
-                                transform: translate(-50%, 100%);
-                            }
-                            
-                            .social-media a .tooltip-social:after {
-                                border-top-color: #262626;
-                            }
-                            
-                            .social-media a:hover .tooltip-social {
-                                opacity: 1;
-                                transform: translate(-50%, -130%);
-                            }
-                            
-                            .space {
-                                padding-left: 130px;
-                            }
-                            
-                            .form-control {
-                                border-color: black;
-                            }
-                            
-                            .tk1 {
-                                font-size: 70px;
-                                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                            }
-                            
-                            .tk2 {
-                                font-size: 20px;
-                                font-family: Tahoma;
-                            }
-                            
-                            .button2 {
-                                display: inline-block;
-                                transition: all 0.2s ease-in;
-                                position: relative;
-                                overflow: hidden;
-                                z-index: 1;
-                                color: #090909;
-                                padding: 0.7em 1.7em;
-                                font-size: 15px;
-                                border-radius: 0.5em;
-                                background: #e8e8e8;
-                                border: 1px solid #e8e8e8;
-                                box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
-                            }
-                            
-                            .button2:active {
-                                color: #666;
-                                box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
-                            }
-                            
-                            .button2:before {
-                                content: "";
-                                position: absolute;
-                                left: 50%;
-                                transform: translateX(-50%) scaleY(1) scaleX(1.25);
-                                top: 100%;
-                                width: 140%;
-                                height: 180%;
-                                background-color: rgba(0, 0, 0, 0.05);
-                                border-radius: 50%;
-                                display: block;
-                                transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-                                z-index: -1;
-                            }
-                            
-                            .button2:after {
-                                content: "";
-                                position: absolute;
-                                left: 55%;
-                                transform: translateX(-50%) scaleY(1) scaleX(1.45);
-                                top: 180%;
-                                width: 160%;
-                                height: 190%;
-                                background-color: black;
-                                border-radius: 50%;
-                                display: block;
-                                transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-                                z-index: -1;
-                            }
-                            
-                            .button2:hover {
-                                color: #ffffff;
-                                border: 1px solid black;
-                            }
-                            
-                            .button2:hover:before {
-                                top: -35%;
-                                background-color: black;
-                                transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-                            }
-                            
-                            .button2:hover:after {
-                                top: -45%;
-                                background-color: black;
-                                transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-                            }
-                        </style>
-                        <br><br>
+
+                        <br>
                         </div>
                         <div class="container">
                             <div class="about-text">
@@ -282,7 +296,7 @@
                                 <p>From weddings and birthdays to corporate gatherings and more, we handle every detail with care and precision. Our mission is to make your celebrations stress-free and extraordinary.
                                 </p>
                             </div>
-                            <br><br>
+                            <br>
                             <hr><br>
 
                             <div class="space">
@@ -294,7 +308,6 @@
                                             <div class="card-client">
                                                 <div class="user-picture">
                                                     <img src="devs/nilay.jpg" width="150" height="120">
-
                                                 </div>
                                                 <p class="name-client" style="letter-spacing: 1.4px;"> Nilay Patel
                                                     <span style="letter-spacing: 1px;">Frontend
@@ -333,11 +346,6 @@
                                             <div class="card-client">
                                                 <div class="user-picture">
                                                     <img src="devs/shiv.jpg" width="150" height="120">
-                                                    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z">
-                                                        </path>
-                                                    </svg>
                                                 </div>
                                                 <p class="name-client" style="letter-spacing: 1.4px;"> Shivam Patel
                                                     <span style="letter-spacing: 1px;">Frontend
@@ -377,8 +385,7 @@
 
                                             <div class="card-client">
                                                 <div class="user-picture">
-                                                    <img src="devs/kallu.jpg" width="150" height="120">
-
+                                                    <img src="devs/kallu.jpg" width="119" height="120">
                                                 </div>
                                                 <p class="name-client" style="letter-spacing: 1.4px;"> Shivang Patel
                                                     <span style="letter-spacing: 1px;">Fullstack
@@ -418,9 +425,9 @@
                             <br><br><br><br>
                             <hr><br><br><br>
 
-                            <table>
+                            <table style="margin-left: 180px;">
                                 <tr>
-                                    <td style="padding-left: 150px;">
+                                    <td style="width: 500px;">
                                         <fieldset class="talk">
                                             <legend class="text">Get in touch !</legend><br>
                                             <form>
@@ -429,25 +436,18 @@
                                                 <div class="form-floating mb-3">
                                                     <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                                                     <label for="floatingInput">Email address</label>
-                                                </div><br>
+                                                </div>
                                                 <div class="form-floating">
-                                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                                    <label for="floatingPassword">Password</label>
+                                                    <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
+                                                    <label for="floatingPassword">Subject</label>
                                                 </div><br>
 
-                                                <label for="datepicker" class="text1">Choose Date : </label>
-                                                <input type="date" id="datepicker">
-                                                <br><br>
-
                                                 <div class="form-floating">
-                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                                    <label for="floatingTextarea">Send us a couple lines about your
-                                                        event</label>
+                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 140px;"></textarea>
+                                                    <label for=" floatingTextarea ">Send us a couple lines about your thoughts</label>
                                                 </div>
                                                 <div><br>
-                                                    <button class="button2">Submit</button>
-                                                    <!-- <button type="submit" class="btn btn-dark">Submit</button> -->
-
+                                                    <button class="button2 ">Submit</button>
                                                 </div>
                                             </form>
                                         </fieldset>
@@ -457,14 +457,13 @@
                                     <td>&nbsp;&nbsp;</td>
                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td>
-                                        <fieldset class="second"><br>
-                                            <pre class="tk1">Thank You</pre><br>
+                                        <fieldset class="second "><br>
+                                            <pre class="tk1 ">Thank You</pre><br>
                                             <hr><br>
-                                            <span style="letter-spacing: 1px;">
-                                                <pre class="tk2">Your details has been successfully
-          submitted. Thanks!
-                      </pre>
-                                            </span><br>
+                                            <pre style="letter-spacing: 1px; ">
+Your details has been successfully 
+        submitted. Thanks!
+</pre><br>
                                         </fieldset>
                                     </td>
                                 </tr>

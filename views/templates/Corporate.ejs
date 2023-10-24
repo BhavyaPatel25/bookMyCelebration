@@ -5,11 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corporate_Event</title>
-    <style>
-        #NavBar {
-            background-color: #7dff69;
-        }
-    </style>
 </head>
 
 <body>
@@ -223,16 +218,10 @@
                 <td>&nbsp;&nbsp;&nbsp;</td>
                 <td>&nbsp;&nbsp;&nbsp;</td>
                 <td style="font-size: 25px;font-family: 'Times New Roman', Times, serif;">
-                    <br>
-                    <br>
-                    <li>Enjoy your special Day !</li><br>
-                    <li>God bless You</li><br>
                     <li>Happy BirthDay</li><br>
                     <li>Enjoy your special Day !</li><br>
                     <li>God bless You</li><br>
                     <li>Happy BirthDay</li><br>
-                    <li>Enjoy your special Day !</li><br>
-                    <li>God bless You</li><br>
                 </td>
             </tr>
 
@@ -251,7 +240,10 @@
                     170
                     <br>
                     <hr style="width: 330px;">
-                    <p class="paragraph">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero at quidem omnis molestiae, ex ea quam obcaecati.</p>
+                    <ul style="font-size: 25px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; list-style-type:circle;">
+                        <li>music</li>
+                        <li>foods</li>
+                    </ul>
                 </div>
             </label>
             </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -265,7 +257,13 @@
                     320
                     <br>
                     <hr style="width: 330px;">
-                    <p class="paragraph">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero at quidem omnis molestiae, ex ea quam obcaecati.</p>
+                    <ul style="font-size: 25px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; list-style-type:circle;">
+                        <li>full services</li>
+                        <li>decoration</li>
+                        <li>music and photos</li>
+                        <li>foods and drinks</li>
+                        <li>invitation card</li>
+                    </ul>
                 </div>
             </label>
             </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -279,7 +277,13 @@
                     540
                     <br>
                     <hr style="width: 330px;">
-                    <p class="paragraph">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero at quidem omnis molestiae, ex ea quam obcaecati.</p>
+                    <ul style="font-size: 25px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; list-style-type:circle;">
+                        <li>full services</li>
+                        <li>decoration</li>
+                        <li>music and photos</li>
+                        <li>foods and drinks</li>
+                        <li>invitation card</li>
+                    </ul>
                 </div>
             </label>
             </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -294,18 +298,19 @@
                     <div class="container">
                         <div class="heading">Corporate_Events</div>
                         <form action="" class="form">
-                            <input required="" class="input" type="name" name="name" id="name" placeholder="Fullname"><br><br>
-                            <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail"><br><br>
-                            <input required="" class="input" type="password" name="password" id="password" placeholder="Password"><br><br>
-                            <input required="" class="input" type="date" name="date" id="date" placeholder="Date"><br><br>
-                            <!-- <input required="" class="input" type="name" name="name" id="name" placeholder="Perk"><br><br> -->
+                            <input required="" class="input" type="email" name="email" id="email" placeholder="Email address"><br><br>
+                            <input required="" class="input" type="name" name="name" id="name" placeholder="Full name"><br><br>
+                            <input required="" class="input" type="text" name="venue" id="venue" placeholder="Venue"><br><br>
+                            <label for="fromDate">From date</label>
+                            <input class="input" type="date" name="fromDate" id="fromDate" placeholder="fromDate" required><br><br>
+                            <label for="fromDate">To date</label>
+                            <input class="input" type="date" name="toDate" id="toDate" placeholder="toDate" required><br><br>
                             <input class="login-button" style="padding-left: 1px;" type="submit" value="Submit">
                         </form>
                     </div><br><br><br>
                 </td>
             </tr>
         </table>
-        <%- include("footer") %>
 </body>
 
 </html>

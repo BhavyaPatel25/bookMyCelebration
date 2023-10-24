@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const Window = require('window');
-const { isLogin, update } = require('./routes/db');
 const DB = require(__dirname + "/routes/db.js");
 port = 3000;
 
@@ -220,6 +219,23 @@ app.post('/collabForms', function(req, res) {
     try {
         DB.addCollabrators(data, formType);
         res.render('templates/collabForms', { log: logedInUserData[0], fType: formType, result: 1 })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+});
+
+app.get('/addVenue', function(req, res) {
+    try {
+        res.render('templates/addVenue', { log: logedInUserData[0], result: 0 });
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+});
+
+app.post('/addVenue', function(req, res) {
+    try {
+        DB.addVenue(req.body);
+        res.render('templates/addVenue', { log: logedInUserData[0], result: 1 });
     } catch (error) {
         res.render('templates/Login', { flag: 0 })
     }

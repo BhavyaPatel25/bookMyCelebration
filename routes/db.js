@@ -54,7 +54,7 @@ async function update({ firstNamePF, lastNamePF, emailPF, addressPF, phnoPF, pas
 }
 
 function CreateAccount({ firstNameCA, lastNameCA, phNumberCA, emailCA, passwordCA }) {
-    connection.query(`insert into master (firstname, lastname, contactno, email, password) values("${firstNameCA}", "${lastNameCA}", "${phNumberCA}", "${emailCA}", "${passwordCA}")`);
+    connection.query(`insert into master (firstname, lastname, contactno, email, password, utype) values("${firstNameCA}", "${lastNameCA}", "${phNumberCA}", "${emailCA}", "${passwordCA}", "0")`);
     return;
 }
 
@@ -113,4 +113,9 @@ function addCollabrators({ emailCollab, priceCollab, locationCollab, contactColl
     return;
 }
 
-module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators };
+function addVenue({ venueEmail, venueName, venueLocation, venueContact, venueServiceInfo }) {
+    connection.query(`insert into venue(userId, venueEmail, venueName, venueLocation, venueContact, venueService) values("9", "${venueEmail}", "${venueName}", "${venueLocation}", "${venueContact}", "${venueServiceInfo}")`);
+    return;
+}
+
+module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue };
