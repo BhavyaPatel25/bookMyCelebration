@@ -81,7 +81,16 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="/Gallery?i=1" style="font-size: 18px;">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link" href="/collab" style="font-size: 18px;">Collabration</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/about?i=1" style="font-size: 18px;">About us</a></li>
+                        <% if(log.utype == 1) { %>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 18px;">Venue</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/addvenue" style="font-size: 18px;">Add venue</a></li>
+                                    <li><a class="dropdown-item" href="/allvenues" style="font-size: 18px;">Venue list</a></li>
+                                </ul>
+                            </li>
+                            <% } %>
+                                <li class="nav-item"><a class="nav-link" href="/about?i=1" style="font-size: 18px;">About us</a></li>
                     </ul>
                 </div>
                 <% if(log.firstname.length+log.lastname.length<= 11){ %>

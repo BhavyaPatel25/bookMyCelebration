@@ -55,7 +55,13 @@
                         <li class="nav-item"><a class="nav-link" href="/Gallery?i=1">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link" href="/collab">Collabration</a></li>
                         <% if(log.utype == 1) { %>
-                            <li class="nav-item"><a class="nav-link" href="/addVenue">Add venue</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Venue</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/addvenue">Add venue</a></li>
+                                    <li><a class="dropdown-item" href="/allvenues">Venue list</a></li>
+                                </ul>
+                            </li>
                             <% } %>
                                 <li class="nav-item"><a class="nav-link" href="/about?i=1">About us</a></li>
                     </ul>

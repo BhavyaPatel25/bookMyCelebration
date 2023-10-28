@@ -283,15 +283,25 @@
 
         <table>
             <tr>
-                <td style="padding-left: 450px;">
-                </td>
+                <td style="padding-left: 420px;"></td>
                 <td>
-                    <div class="container">
-                        <div class="heading">Social_Events</div>
-                        <form action="" class="form">
-                            <input required="" class="input" type="email" name="email" id="email" placeholder="Email address"><br><br>
-                            <input required="" class="input" type="name" name="name" id="name" placeholder="Full name"><br><br>
-                            <input required="" class="input" type="text" name="venue" id="venue" placeholder="Venue"><br><br>
+                    <div class="container" style="width: 650px;">
+                        <div class="heading">Social event</div>
+                        <form action="/addEvent?etype=2" class="form" method="post">
+                            <label for="email">Email address</label>
+                            <input required="" class="input" type="email" name="email" id="email" placeholder="Email address" value="<%- log.email %>"><br><br>
+                            <label for="name">Full name</label>
+                            <input required="" class="input" type="name" name="name" id="name" placeholder="Full name" value="<%- log.firstname +" " +log.lastname%> "><br><br>
+                            <!-- <input required="" class="input" type="text" name="venue" id="venue" placeholder="Venue"><br><br> -->
+                            <label for="venue">Venue</label>
+                            <select class="form-select input" aria-label="Venue" id="venue" name="venue">
+                                <% for(var i=0; i<venues.length; i++) { %>
+                                    <option value="<%= venues[i].venueId %>"><%- venues[i].venueName %></option>
+                                <% } %>
+                                <!-- <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option> -->
+                            </select><br>
                             <label for="fromDate">From date</label>
                             <input class="input" type="date" name="fromDate" id="fromDate" placeholder="fromDate" required><br><br>
                             <label for="fromDate">To date</label>

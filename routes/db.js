@@ -87,7 +87,7 @@ function OTPMessage(firstname, number) {
                                     <a style="text-decoration:none;color:#1c1d1f"><b></b></a><b><a style="text-decoration:none;color:#1c1d1f">Creating a new account</a></b>
                                 </p>
                                 <p>
-                                    <a style="text-decoration:none;color:#1c1d1f">Your 6-Digit verification code is <b style="font-size: 16px; margin-top: 4px; margin-left: 4px;">${number}</b></a>
+                                    <a style="text-decoration:none;color:#1c1d1f">Your 4-Digit verification code is <b style="font-size: 16px; margin-top: 4px; margin-left: 4px;">${number}</b></a>
                                 </p>
                                 <p>
                                     <a style="text-decoration:none;color:#1c1d1f">This code was sent to you to verify your new account. </a>
@@ -118,4 +118,19 @@ function addVenue({ venueEmail, venueName, venueLocation, venueContact, venueSer
     return;
 }
 
-module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue };
+async function loadVenueData() {
+    venueList = await connection.query(`select * from venue`);
+    return venueList;
+}
+
+function addEvents({ email, name, venue, fromDate, toDate }, etype, userid) {
+    connection.query(`insert into events(userId, email, fullname, venueId, fromDate, toDate, eventType) VALUES("${userid}", "${email}", "${name}", "${venue}", "${fromDate}", "${toDate}", "${etype}")`);
+    return;
+}
+
+async function loadUpcomingEventData() {
+    result = await connection.query(`select * from events`);
+    return result;
+}
+
+module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue, loadVenueData, addEvents, loadUpcomingEventData };

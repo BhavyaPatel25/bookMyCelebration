@@ -17,6 +17,8 @@ let verificationNum = 0;
 let createAccountData;
 let logedInUserData;
 let LoginData;
+let venueList;
+let upcomingEventList;
 let flag = 0;
 
 //Routes for rendaring the file
@@ -24,15 +26,21 @@ app.get('/', function(req, res) {
     res.render("templates/home");
 });
 
-app.get('/upcomingevent', function(req, res) {
+app.get('/upcomingevent', async function(req, res) {
+    upcomingEventList = await DB.loadUpcomingEventData();
+    upcomingEventList = upcomingEventList[0];
+    venueList = await DB.loadVenueData();
+    venueList = venueList[0];
     try {
-        res.render("templates/upcoming", { log: logedInUserData[0] });
+        res.render("templates/upcoming", { log: logedInUserData[0], eData: upcomingEventList, venues: venueList });
     } catch (error) {
         res.render("templates/Login", { flag: 0 });
     }
 });
 
-app.get('/addevent', function(req, res) {
+app.get('/addevent', async function(req, res) {
+    venueList = await DB.loadVenueData();
+    venueList = venueList[0];
     try {
         res.render("templates/addevent", { log: logedInUserData[0] });
     } catch (error) {
@@ -119,7 +127,7 @@ app.get('/logedinhome', function(req, res) {
 });
 
 app.get('/forgot', function(req, res) {
-    res.render('templates/forgot');
+    res.render('templates/forgot', { flag: 0 });
 });
 
 app.post('/forgot', function(req, res) {
@@ -175,30 +183,30 @@ app.get('/about', function(req, res) {
     }
 });
 
-app.get('/birthday', function(req, res) {
+app.get('/birthday', async function(req, res) {
     try {
-        res.render('templates/Birthday', { log: logedInUserData[0] })
+        res.render('templates/Birthday', { log: logedInUserData[0], venues: venueList })
     } catch (error) {
         res.render('templates/Login', { flag: 0 })
     }
 });
 app.get('/corporate', function(req, res) {
     try {
-        res.render('templates/corporate', { log: logedInUserData[0] })
+        res.render('templates/corporate', { log: logedInUserData[0], venues: venueList })
     } catch (error) {
         res.render('templates/Login', { flag: 0 })
     }
 });
 app.get('/educational', function(req, res) {
     try {
-        res.render('templates/educational', { log: logedInUserData[0] })
+        res.render('templates/educational', { log: logedInUserData[0], venues: venueList })
     } catch (error) {
         res.render('templates/Login', { flag: 0 })
     }
 });
 app.get('/socialevent', function(req, res) {
     try {
-        res.render('templates/socialevent', { log: logedInUserData[0] })
+        res.render('templates/socialevent', { log: logedInUserData[0], venues: venueList })
     } catch (error) {
         res.render('templates/Login', { flag: 0 })
     }
@@ -241,7 +249,29 @@ app.post('/addVenue', function(req, res) {
     }
 });
 
+app.post('/addEvent', async function(req, res) {
+    upcomingEventList = await DB.loadUpcomingEventData();
+    upcomingEventList = upcomingEventList[0];
+    venueList = await DB.loadVenueData();
+    venueList = venueList[0];
+    try {
+        console.log(req.body.fromDate)
+        DB.addEvents(req.body, req.query.etype, logedInUserData[0].userId)
+        res.render("templates/upcoming", { log: logedInUserData[0], eData: upcomingEventList, venues: venueList });
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+});
 
+app.get('/allvenues', async function(req, res) {
+    venueList = await DB.loadVenueData();
+    venueList = venueList[0];
+    try {
+        res.render('templates/allvenues', { log: logedInUserData[0], venues: venueList });
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+})
 
 // let server = app.listen(0, () => {
 //     //console.log(`Server is running at http://localhost:${port}/`);
