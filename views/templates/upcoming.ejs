@@ -16,7 +16,7 @@
             .container {
                 width: 90%;
                 margin: 0 auto;
-                margin-top: 40px;
+                margin-top: 30px;
                 padding: 20px;
                 background-color: rgba(255, 255, 255, 0.8);
                 border-radius: 10px;
@@ -89,16 +89,16 @@
                 box-shadow: 0px 0px 30px #428bca9b;
             }
         </style>
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Hello, world! This is a toast message.
-            </div>
+        <div class="btn-group dropend" style="margin-top: 30px; margin-left: 107px;">
+            <button type="button" class="btn btn-Primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Table view
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="/upcomingevent">Table view</a>
+                    <a class="dropdown-item" href="/upcomingCalender">Calender view</a>
+                </li>
+            </ul>
         </div>
         <div class="container">
             <h4 style="margin-bottom: 20px;">Upcoming Events</h4>
@@ -110,43 +110,57 @@
                     <th>To date</th>
                     <th>Location</th>
                     <th>Organizer</th>
+                    <th>Action</th>
                 </tr>
-                <% if(eData.length > 0) { %>
+                <% if(eData.length > 0) { k = 0 %>
                     <% for(var i = 0; i < eData.length; i++) { %>
-                        <tr>
-                            <td>
-                                <%- i+1 %>
-                            </td>
-                            <td>
-                                <% if(eData[i].eventType == 0) { %>
-                                    Birthday party
-                                    <% } else if(eData[i].eventType == 1) {  %>
-                                        Educational event
-                                        <% } else if(eData[i].eventType == 2) {  %>
-                                            Social event
-                                            <% } else if(eData[i].eventType == 3) {  %>
-                                                Corporate event
+                        <% const todaysdate = new Date() 
+                            if(eData[i].fromDate >= todaysdate) { %>
+                            <tr>
+                                <td>
+                                    <%- k+1 %>
+                                        <% k = k + 1 %>
+                                </td>
+                                <td>
+                                    <% if(eData[i].eventType == 0) { %>
+                                        Birthday party
+                                        <% } else if(eData[i].eventType == 1) {  %>
+                                            Educational event
+                                            <% } else if(eData[i].eventType == 2) {  %>
+                                                Social event
+                                                <% } else if(eData[i].eventType == 3) {  %>
+                                                    Corporate event
+                                                    <% } %>
+                                </td>
+                                <td>
+                                    <%- eData[i].fromDate.getDate()+"-"+(eData[i].fromDate.getMonth()+1)+"-"+eData[i].fromDate.getFullYear() %>
+                                </td>
+                                <td>
+                                    <%- eData[i].toDate.getDate()+"-"+(eData[i].toDate.getMonth()+1)+"-"+eData[i].toDate.getFullYear() %>
+                                </td>
+                                <td>
+                                    <% for(var j = 0; j < venues.length; j++) { %>
+                                        <% if(eData[i].venueId == venues[j].venueId) {  %>
+                                            <%- venues[j].venueLocation %>
                                                 <% } %>
-                            </td>
-                            <td>
-                                <%- eData[i].fromDate.getDate()+"-"+(eData[i].fromDate.getMonth()+1)+"-"+eData[i].fromDate.getFullYear() %>
-                            </td>
-                            <td>
-                                <%- eData[i].toDate.getDate()+"-"+(eData[i].toDate.getMonth()+1)+"-"+eData[i].toDate.getFullYear() %>
-                            </td>
-                            <td>
-                                <% for(var j = 0; j < venues.length; j++) { %>
-                                    <% if(eData[i].venueId == venues[j].venueId) {  %>
-                                        <%- venues[j].venueLocation %>
-                                            <% } %>
-                                                <% } %>
-                            </td>
-                            <td>
-                                <%- eData[i].fullname %>
-                            </td>
-                        </tr>
-                        <% } %>
+                                                    <% } %>
+                                </td>
+                                <td>
+                                    <%- eData[i].fullname %>
+                                </td>
+                                <td style="text-align: center;">
+                                    <% if(log.userId == eData[i].userId) { %>
+                                        <a href="/deleteeventDetails?i=<%- eData[i].eventId %>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                      </svg></a>
+                                        <% } %>
+                                </td>
+                            </tr>
                             <% } %>
+                                <% } %>
+                                    <% } %>
+
             </table>
         </div>
         <div class="footer">

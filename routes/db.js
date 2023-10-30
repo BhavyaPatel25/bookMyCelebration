@@ -129,8 +129,23 @@ function addEvents({ email, name, venue, fromDate, toDate }, etype, userid) {
 }
 
 async function loadUpcomingEventData() {
-    result = await connection.query(`select * from events`);
+    result = await connection.query(`select * from events ORDER BY fromDate ASC`);
     return result;
 }
 
-module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue, loadVenueData, addEvents, loadUpcomingEventData };
+function addFeedback({ email, subject, feedback }) {
+    connection.query(`insert into feedback(email, subject, Detail) VALUES("${email}", "${subject}", "${feedback}")`);
+    console.log("Feedback Added")
+    return;
+}
+
+async function loadFeedbackData() {
+    return await connection.query(`select * from feedback`);
+}
+
+async function deleteEvent(id) {
+    await connection.query(`delete from events where eventId="${id}"`);
+    return;
+}
+
+module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue, loadVenueData, addEvents, loadUpcomingEventData, addFeedback, loadFeedbackData, deleteEvent };

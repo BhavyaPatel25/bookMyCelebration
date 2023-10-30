@@ -38,6 +38,14 @@ app.get('/upcomingevent', async function(req, res) {
     }
 });
 
+app.get('/upcomingCalender', function(req, res) {
+    try {
+        res.render("templates/upcomingCalender", { log: logedInUserData[0] });
+    } catch (error) {
+        res.render("templates/Login", { flag: 0 });
+    }
+})
+
 app.get('/addevent', async function(req, res) {
     venueList = await DB.loadVenueData();
     venueList = venueList[0];
@@ -173,13 +181,55 @@ app.get('/Gallery', function(req, res) {
 app.get('/about', function(req, res) {
     const arg = req.query.i;
     if (arg == 0) {
-        res.render('templates/aboutus', { access: 0 });
+        res.render('templates/aboutus', { access: 0, submitted: 0 });
     } else {
         try {
-            res.render('templates/aboutus', { log: logedInUserData[0], access: 1 });
+            res.render('templates/aboutus', { log: logedInUserData[0], access: 1, submitted: 0 });
         } catch (error) {
             res.render('templates/Login', { flag: 0 });
         }
+    }
+});
+
+app.post('/about', function(req, res) {
+    const arg = req.query.i;
+    const data = req.body;
+    DB.addFeedback(data);
+    if (arg == 0) {
+        res.render('templates/aboutus', { access: 0, submitted: 1 });
+    } else {
+        try {
+            res.render('templates/aboutus', { log: logedInUserData[0], access: 1, submitted: 1 });
+        } catch (error) {
+            res.render('templates/Login', { flag: 0 });
+        }
+    }
+});
+
+app.get('/feedbackList', async function(req, res) {
+    try {
+        const data = await DB.loadFeedbackData();
+        res.render('templates/feedbackList', { log: logedInUserData[0], fData: data[0] });
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 });
+    }
+});
+
+app.get('/deleteeventdetails', async function(req, res) {
+    try {
+        const eId = req.query.i;
+        await DB.deleteEvent(eId);
+        upcomingEventList = await DB.loadUpcomingEventData();
+        upcomingEventList = upcomingEventList[0];
+        venueList = await DB.loadVenueData();
+        venueList = venueList[0];
+        try {
+            res.render("templates/upcoming", { log: logedInUserData[0], eData: upcomingEventList, venues: venueList });
+        } catch (error) {
+            res.render("templates/Login", { flag: 0 });
+        }
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 });
     }
 });
 
@@ -255,7 +305,6 @@ app.post('/addEvent', async function(req, res) {
     venueList = await DB.loadVenueData();
     venueList = venueList[0];
     try {
-        console.log(req.body.fromDate)
         DB.addEvents(req.body, req.query.etype, logedInUserData[0].userId)
         res.render("templates/upcoming", { log: logedInUserData[0], eData: upcomingEventList, venues: venueList });
     } catch (error) {

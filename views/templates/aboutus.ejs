@@ -430,21 +430,25 @@
                                     <td style="width: 500px;">
                                         <fieldset class="talk">
                                             <legend class="text">Get in touch !</legend><br>
-                                            <form>
+                                            <form method="post" action="/about">
                                                 <hr>
                                                 <br>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                                    <label for="floatingInput">Email address</label>
+                                                    <% if(access==1) { %>
+                                                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" value="<%- log.email %>">
+                                                        <% } else { %>
+                                                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                                                            <% } %>
+                                                                <label for="floatingInput">Email address</label>
                                                 </div>
                                                 <div class="form-floating">
-                                                    <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
-                                                    <label for="floatingPassword">Subject</label>
+                                                    <input type="text" class="form-control" id="floatingsubject" placeholder="subject" name="subject">
+                                                    <label for="floatingsubject">Subject</label>
                                                 </div><br>
 
                                                 <div class="form-floating">
-                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 140px;"></textarea>
-                                                    <label for=" floatingTextarea ">Send us a couple lines about your thoughts</label>
+                                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 140px;" name="feedback"></textarea>
+                                                    <label for="floatingTextarea">Send us a couple lines about your thoughts</label>
                                                 </div>
                                                 <div><br>
                                                     <button class="button2 ">Submit</button>
@@ -460,10 +464,12 @@
                                         <fieldset class="second "><br>
                                             <pre class="tk1 ">Thank You</pre><br>
                                             <hr><br>
-                                            <pre style="letter-spacing: 1px; ">
+                                            <% if(submitted == 1) { %>
+                                                <pre style="letter-spacing: 1px; ">
 Your details has been successfully 
         submitted. Thanks!
-</pre><br>
+    </pre><br>
+                                                <% } %>
                                         </fieldset>
                                     </td>
                                 </tr>
