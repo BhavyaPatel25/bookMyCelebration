@@ -320,7 +320,16 @@ app.get('/allvenues', async function(req, res) {
     } catch (error) {
         res.render('templates/Login', { flag: 0 })
     }
-})
+});
+
+app.get('/collabList', async function(req, res) {
+    try {
+        const data = await DB.loadCollabratorData();
+        res.render('templates/collabList', { log: logedInUserData[0], cData: data[0] })
+    } catch (error) {
+        res.render('templates/Login', { flag: 0 })
+    }
+});
 
 // let server = app.listen(0, () => {
 //     //console.log(`Server is running at http://localhost:${port}/`);

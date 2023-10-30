@@ -148,4 +148,8 @@ async function deleteEvent(id) {
     return;
 }
 
-module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue, loadVenueData, addEvents, loadUpcomingEventData, addFeedback, loadFeedbackData, deleteEvent };
+async function loadCollabratorData() {
+    return await connection.query(`select * from collabrator`);
+}
+
+module.exports = { isFound, CreateAccount, isLogin, sendEMail, update, OTPMessage, addCollabrators, addVenue, loadVenueData, addEvents, loadUpcomingEventData, addFeedback, loadFeedbackData, deleteEvent, loadCollabratorData };
